@@ -1,0 +1,25 @@
+.Movie {
+    max-width: calc(20% - 25px);
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    margin-bottom: 20px;
+
+    transition: all 0.5s;
+}
+
+.Movie:hover, .Movie:hover img {
+    box-shadow: 2px 1px 58px -6px rgba(0,0,0,0.75);
+    border-radius: 5px;
+}
+
+.Movie div {
+    text-align: center;
+}
+
+.Movie img {
+    width: 100%;
+    transition: all 0.5s;
+}

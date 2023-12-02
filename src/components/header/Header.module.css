@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+}
+.headerWrapper {
+    position: relative;
+    z-index: 5;
+    /*background-color: white;*/
+}
+
+.Header {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*background-color: white;*/
+}
+
+.headerList {
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+    list-style: none;
+}
+
+/*a {*/
+/*    text-decoration: none;*/
+/*    color: black;*/
+/*}*/
+
+p {
+    margin: 0
+}
+
+p:hover {
+    cursor: pointer;
+}
+
+.genresWrapper {
+    width: 100%;
+
+    position: absolute;
+    top: -500px;
+
+    transition: top 0.5s;
+    z-index: 1;
+}
+
+.genresWrapper.show {
+    top: 60px;
+}
