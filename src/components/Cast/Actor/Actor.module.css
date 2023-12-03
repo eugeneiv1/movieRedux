@@ -1,0 +1,12 @@
+
+.actorWrapper {
+    max-width: 11%;
+
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.actorImage.actorImage {
+    width: 100%;
+    filter: grayscale(0%);
+}

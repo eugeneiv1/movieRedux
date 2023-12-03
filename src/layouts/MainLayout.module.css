@@ -1,0 +1,28 @@
+.light {
+    background-color: white;
+    color: #262626;
+    transition: all 0.3s;
+}
+
+.dark {
+    background-color: #262626;
+    color: white;
+    transition: all 0.3s;
+}
+
+.dark img {
+    filter: grayscale(100%);
+}
+
+.dark .Movie:hover, .dark .Movie:hover img {
+    box-shadow: 2px 1px 58px -6px rgba(239, 239, 239, 0.75);
+}
+
+.dark button{
+    color: white;
+}
+
+.dark div {
+    color: white;
+}
+

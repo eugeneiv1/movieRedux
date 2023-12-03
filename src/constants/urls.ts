@@ -7,7 +7,9 @@ const search = '/search';
 
 const urls = {
     movies: {
-        allMovies: `${discover}${movie}`
+        allMovies: `${discover}${movie}`,
+        byId: (id: number): string => `${movie}/${id}`,
+        cast: (id: number): string => `${movie}/${id}/credits`
     },
     genre: {
         allGenres: `${genre}${movie}/list`

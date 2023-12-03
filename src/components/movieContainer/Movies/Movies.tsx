@@ -10,12 +10,13 @@ interface IProps extends PropsWithChildren {
     page: number
 }
 const Movies:FC<IProps> = ({page}) => {
-    const {movies} = useAppSelector(state => state.movie);
-    const dispatch = useAppDispatch()
+    const {movies, genre, searchValue} = useAppSelector(state => state.movie);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(movieSliceActions.getAllMovies({page}))
-    }, [dispatch, page]);
+        searchValue ? dispatch(movieSliceActions.searchMovies({search: searchValue, page})) : dispatch(movieSliceActions.getAllMovies({page, genre}));
+    }, [dispatch, page, genre, searchValue]);
+
     return (
         <div className={css.Movies}>
             {movies.map(movie => <Movie key={movie.id} movie={movie} />)}

@@ -1,0 +1,11 @@
+.genreWrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    padding: 20px;
+
+    background-color: #3a3838;
+    opacity: 0.8;
+}

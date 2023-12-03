@@ -1,32 +1,50 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {IMovie} from "../../interfaces/movieInterface";
+import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
+
+import {IMovie} from "../../interfaces/movieInterface";
 import {movieService} from "../../services/movieService";
 import {IPagination} from "../../interfaces/paginationInterface";
 
 interface IState {
     movies: IMovie[],
     page: number,
+    genre: number,
     totalPages: number,
     totalResults: number,
+    searchValue:string
 }
 
 const initialState:IState = {
     movies: [],
     page: 1,
+    genre: null,
     totalPages: null,
     totalResults: null,
+    searchValue: null
 }
 
-const getAllMovies = createAsyncThunk<IPagination, { page: number }>(
+const getAllMovies = createAsyncThunk<IPagination, { page: number , genre?:number}>(
     'getAllMovies/movieSlice',
-    async ({page}, {rejectWithValue}) => {
+    async ({page,genre }, {rejectWithValue}) => {
         try {
-            const {data} = await movieService.getAllMovies(page);
+            const {data} = genre ? await movieService.getAllMovies(page, genre): await movieService.getAllMovies(page);
             return data
         } catch (e) {
             const err = e as AxiosError;
             return rejectWithValue(err.response?.data)
+        }
+    }
+)
+
+const searchMovies = createAsyncThunk<IPagination, {search: string, page: number}>(
+    'searchMovies/moviesSlice',
+    async ({search, page}, {rejectWithValue}) => {
+        try {
+            const {data} = await movieService.searchMovies(search, page);
+            return data;
+        }catch (e) {
+            const err = e as AxiosError;
+            return rejectWithValue(err.response?.data);
         }
     }
 )
@@ -37,11 +55,26 @@ const movieSlice = createSlice({
     reducers: {
         setPage: (state, action) => {
             state.page = action.payload;
+        },
+        setGenre: (state, action) => {
+            state.genre = action.payload;
+        },
+        setSearchValue: (state, action) => {
+            state.searchValue = action.payload
         }
     },
     extraReducers:builder =>
         builder
-            .addCase(getAllMovies.fulfilled, (state, action) => {
+            // .addCase(getAllMovies.fulfilled, (state, action) => {
+            //     state.movies = action.payload.results;
+            //     state.page = action.payload.page;
+            //     state.totalPages = action.payload.total_pages;
+            //     state.totalResults = action.payload.total_results;
+            // })
+            // .addCase(searchMovies.fulfilled, (state, action) => {
+            //     state.movies = action.payload.results
+            // })
+            .addMatcher(isFulfilled(getAllMovies, searchMovies), (state, action) => {
                 state.movies = action.payload.results;
                 state.page = action.payload.page;
                 state.totalPages = action.payload.total_pages;
@@ -53,7 +86,8 @@ const {reducer:movieReducer, actions} = movieSlice;
 
 const movieSliceActions = {
     ...actions,
-    getAllMovies
+    getAllMovies,
+    searchMovies
 }
 
 export {

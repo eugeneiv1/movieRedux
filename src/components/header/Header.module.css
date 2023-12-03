@@ -14,6 +14,7 @@ body {
     justify-content: space-between;
     align-items: center;
     /*background-color: white;*/
+    padding: 10px 20px;
 }
 
 .headerList {
@@ -21,12 +22,8 @@ body {
     width: 30%;
     justify-content: space-between;
     list-style: none;
+    padding: 0;
 }
-
-/*a {*/
-/*    text-decoration: none;*/
-/*    color: black;*/
-/*}*/
 
 p {
     margin: 0
@@ -48,4 +45,37 @@ p:hover {
 
 .genresWrapper.show {
     top: 60px;
+}
+
+.user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px
+}
+
+.logo.logo{
+    width: 50px;
+    filter: grayscale(0%);
+}
+
+.theme {
+    width: 30px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme:hover {
+    cursor: pointer;
+}
+
+.theme svg {
+    transition: all 0.5s;
+}
+
+.theme:hover svg {
+    height: 1.2em;
+    width: 1.2em;
 }
