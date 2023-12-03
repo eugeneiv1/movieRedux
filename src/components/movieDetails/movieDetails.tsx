@@ -31,7 +31,7 @@ const MovieDetails = () => {
                 </div>
                 <div>
                     <h4>Genres:</h4>
-                    <ul>
+                    <ul className={css.genresList}>
                         {movieDetails.genres.map(genre => <Genre key={genre.id} genre={genre}/>)}
                     </ul>
                 </div>
